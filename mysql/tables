@@ -1,0 +1,16 @@
+use vocabulary;
+
+create table words (
+  id int NOT NULL auto_increment,
+  word varchar(255),
+  primary key (id)		
+);
+
+create table a (
+	id int NOT NULL auto_increment,
+	n1	int NOT NULL,
+	n2 int NOT NULL,
+	foreign key (n1) references words(id),
+	foreign key (n2) references words(id),
+	primary key (id)
+)

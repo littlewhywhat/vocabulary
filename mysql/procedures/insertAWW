@@ -1,0 +1,18 @@
+-- --------------------------------------------------------------------------------
+-- Routine DDL
+-- Note: comments before and after the routine body will not be stored by the server
+-- --------------------------------------------------------------------------------
+DELIMITER $$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `insertAWW`(
+	IN wordValue1 varchar(255), 
+	IN wordValue2 varchar(255)
+)
+BEGIN
+	call insertWordIfNotExists(wordValue1);
+	call insertWordIfNotExists(wordValue2);
+	call getIdByWord(wordValue2, @d);
+	call getIdByWord(wordValue1, @a);
+	call insertAIfNotExists(@a, @d);
+	
+END

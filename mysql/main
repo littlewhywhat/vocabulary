@@ -1,0 +1,6 @@
+-- set @a = '17';
+set @word = 'impute';
+
+call getIdByWord(@word, @id);
+
+call selectAs(@id);

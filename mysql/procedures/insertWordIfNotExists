@@ -1,0 +1,17 @@
+-- --------------------------------------------------------------------------------
+-- Routine DDL
+-- Note: comments before and after the routine body will not be stored by the server
+-- --------------------------------------------------------------------------------
+DELIMITER $$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `insertWordIfNotExists`(
+	IN wordValue varchar(255)
+)
+BEGIN
+	select count(id) 
+		into @count 
+		from words 
+		where word = wordValue;
+	IF @count = 0 then call insertWord(wordValue);
+	end if;
+END

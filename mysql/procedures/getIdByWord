@@ -1,0 +1,16 @@
+-- --------------------------------------------------------------------------------
+-- Routine DDL
+-- Note: comments before and after the routine body will not be stored by the server
+-- --------------------------------------------------------------------------------
+DELIMITER $$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `getIdByWord`(
+	IN wordValue varchar(255), 
+	OUT idValue INT
+)
+BEGIN
+	select id  into idValue
+	from words 
+	where word = wordValue
+	limit 1 ;
+END
