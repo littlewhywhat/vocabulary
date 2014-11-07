@@ -1,0 +1,4 @@
+vocabulary
+==========
+
+Awesome vocabulary
