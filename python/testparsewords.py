@@ -168,21 +168,6 @@ class TestParseWords(unittest.TestCase):
         string += self.AND + self.LAND
         check = [self.ADD, self.STRONG]
         self.check(string, check)
-    # def test_One(self):
-    #     string = self.ADD + self.COMMA + self.STRONG + self.AND + self.LAND
-    #     check = [self.ADD, self.STRONG, self.LAND]
-    #     self.check(string, check)
-    
-    # def test_Two(self):
-    #     string = self.ADD + self.AND + self.STRONG + self.SPACE 
-    #     string += self.LAND + self.SEMICOLON + self.SECURE
-    #     check = [self.SECURE]
-    #     self.check(string, check)
-
-    # def test_Three(self):
-    #     string = self.ADD + self.AND + self.STRONG 
-    #     check = [self.ADD, self.STRONG]
-    #     self.check(string, check)
 
     def check(self, string, check):
         results = script.parseWords(string)
@@ -190,37 +175,6 @@ class TestParseWords(unittest.TestCase):
         self.assertEquals(len(results), len(check))
         for result in results :
             self.assertEquals(True, result in check)
-
-# string = 'strong and secure land; add'
-# print string
-# words = parseWords(string)
-# print words
-
-# string = 'unexplored, unoccupied area of land'
-# print string
-# words = parseWords(string)
-# print words
-
-# string = 'achieve; accomplish'
-# print string
-# words = parseWords(string)
-# print words
-
-# string = 'chilly, refreshing (weather)'
-# print string
-# words = parseWords(string)
-# print words
-
-# string = 'examine and determine'
-# print string
-# words = parseWords(string)
-# print words
-
-# string = 'exand determine'
-# print string
-# words = parseWords(string)
-# print words
-
 
 if __name__ == '__main__':
     unittest.main()
