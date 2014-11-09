@@ -138,37 +138,3 @@ def divideElemsBy(divider, elems) :
 def test() :
     main(datetime(2014,0,0))
 
-string = 'strong and secure; add'
-print string
-words = parseWords(string)
-print words
-
-string = 'strong and secure land; add'
-print string
-words = parseWords(string)
-print words
-
-string = 'unexplored, unoccupied area of land'
-print string
-words = parseWords(string)
-print words
-
-string = 'achieve; accomplish'
-print string
-words = parseWords(string)
-print words
-
-string = 'chilly, refreshing (weather)'
-print string
-words = parseWords(string)
-print words
-
-string = 'examine and determine'
-print string
-words = parseWords(string)
-print words
-
-string = 'exand determine'
-print string
-words = parseWords(string)
-print words
