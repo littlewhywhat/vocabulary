@@ -1,5 +1,5 @@
 import unittest
-import script
+import wordparser
 
 class TestParseWords(unittest.TestCase):
 
@@ -170,7 +170,7 @@ class TestParseWords(unittest.TestCase):
         self.check(string, check)
 
     def check(self, string, check):
-        results = script.parseWords(string)
+        results = wordparser.parseWords(string)
         print string , check , results
         self.assertEquals(len(results), len(check))
         for result in results :
