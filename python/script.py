@@ -1,6 +1,6 @@
-import MySQLdb
 import requests
 import wordparser
+import vocabularydb
 
 from datetime import datetime
 from lxml import html
@@ -45,23 +45,6 @@ def appendFromContent(contents, synonyms) :
         for word in words :
             synonyms.append(word)
 
-def storySoFar(cur) :
-    cur.execute('SELECT * FROM a ORDER BY id DESC LIMIT 5')
-    for row in cur.fetchall() :
-       print row
-    cur.execute('SELECT * FROM words ORDER BY id DESC LIMIT 5')
-    for row in cur.fetchall() :
-       print row
-
-def addGraphToDB(db, cur, wordgraph) :
-    try:
-        for word, synonyms in wordgraph.items() :
-            for synonym in synonyms :
-                 cur.callproc('insertAWW', (word, synonym, 0 , 0))
-        db.commit()
-    except:
-        db.rollback
-
 def main(date) :
     # Authenticate
     URL = 'http://app.dictionary.com/login'
@@ -79,30 +62,19 @@ def main(date) :
     wordgraph = getWordGraph(tree, date)
     
     # Connect to MySQL
-    HOST = '127.0.0.1'
-    USER = 'root'
-    PWD = 'vocabulary'
-    DB = 'vocabulary'
-    
-    db = MySQLdb.connect(host=HOST, user=USER, passwd=PWD, db=DB)
-    cur = db.cursor()
+    base = Database()
+    base.open()
     
     print 'was'
-    storySoFar(cur)
+    base.storySoFar()
     
-    addGraphToDB(db, cur, wordgraph)
-    
+    base.addGraph(wordgraph)
+
     print 'now'
-    storySoFar(cur)
-
-    # print wordgraph['brisk']
-    # print wordgraph['combustible']
-    # print wordgraph['augment']
-    # print wordgraph['analyze']
+    base.storySoFar()
+    
     print len(wordgraph)
-    cur.close()
-    db.close()
-
+    base.close()
 
 def test() :
     main(datetime(2014,0,0))
