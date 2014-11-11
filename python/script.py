@@ -1,19 +1,8 @@
-import requests
+import thesaurus
 import wordparser
 import vocabularydb
 
 from datetime import datetime
-from lxml import html
-
-def getSession(URL, user, pwd, source, logindest) :
-    session = requests.session()
-    login_data = { 'source' : source,
-               'logindest' : logindest,
-               'username' : user,
-               'password' : pwd
-               }
-    print session.post(URL, data=login_data)
-    return session
 
 def getWordGraph(tree, date) :
     graph = {}
@@ -46,29 +35,26 @@ def appendFromContent(contents, synonyms) :
             synonyms.append(word)
 
 def main(date) :
-    # Authenticate
-    URL = 'http://app.dictionary.com/login'
+    # Authenticate   
     USER = 'littlewhywhat@gmail.com'
     PWD = 'equilibrium'
-    SOURCE = 'header_thes'
-    LOGINDEST = 'http://www.thesaurus.com'
-    session = getSession(URL, USER, PWD, SOURCE, LOGINDEST)
     
-    # Access a page that requires you to be logged in
-    request = session.get('http://www.thesaurus.com/my-synonyms')
-    tree = html.fromstring(request.text)
+    th = thesaurus.Thesaurus()
+    th.login(USER, PWD)
+    tree = th.getSynonyms()    
     
     # Get word graph
     wordgraph = getWordGraph(tree, date)
-    
+    print wordgraph
+
     # Connect to MySQL
-    base = Database()
+    base = vocabularydb.Database()
     base.open()
     
     print 'was'
     base.storySoFar()
     
-    base.addGraph(wordgraph)
+    # base.addGraph(wordgraph)
 
     print 'now'
     base.storySoFar()
@@ -77,5 +63,5 @@ def main(date) :
     base.close()
 
 def test() :
-    main(datetime(2014,0,0))
+    main(datetime(2014,10,1))
 
