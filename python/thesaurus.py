@@ -1,5 +1,5 @@
 import requests
-from lxml import html
+import wordgraph
 
 class Thesaurus():
     def login(self, user, password):
@@ -18,8 +18,9 @@ class Thesaurus():
         print session.post(URL, data=login_data)
         return session
 
-    def getSynonyms(self) :
+    def getSynonyms(self, date) :
         URL = 'http://www.thesaurus.com/my-synonyms'
         request = self.session.get(URL)
-        tree = html.fromstring(request.text)
-        return tree
+        graph = wordgraph.get(request.text, date)
+        return graph
+
