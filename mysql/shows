@@ -15,3 +15,5 @@ SET PASSWORD = PASSWORD('vocabulary');
 select * from words;
 
 select * from a;
+
+select * from words where learned = TRUE;

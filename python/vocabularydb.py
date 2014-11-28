@@ -25,6 +25,7 @@ class Database:
             for word, synonyms in wordgraph.items() :
                 for synonym in synonyms :
                     cursor.callproc('insertAWW', (word, synonym, 0 , 0))
+                cursor.callproc('learnWord', (word,))
             database.commit()
         except:
             database.rollback()

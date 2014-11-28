@@ -4,9 +4,7 @@
 -- --------------------------------------------------------------------------------
 DELIMITER $$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `insertWord`(
-	IN wordValue varchar(255)
-)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `learnWordById`(IN idValue INT)
 BEGIN
-	insert into words (word, learned) values (wordValue, FALSE);
+		update words set learned = TRUE where id = idValue;
 END
